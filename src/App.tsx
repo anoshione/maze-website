@@ -32,9 +32,9 @@ const DynamicMazeBackground = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.15]">
+    <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.35]">
       <svg className="w-full h-full" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid slice">
-        <path d={mazeData} stroke="white" strokeWidth="0.015" fill="none" opacity="0.4" />
+        <path d={mazeData} stroke="white" strokeWidth="0.015" fill="none" opacity="1" />
       </svg>
     </div>
   );
@@ -69,7 +69,7 @@ const MiniGameWindow = ({ themeColors }: { themeColors: any }) => {
 export default function App() {
   const [activeSection, setActiveSection] = useState("hero");
   const [difficulty, setDifficulty] = useState("Medium");
-  const [activeThemeId, setActiveThemeId] = useState("slate");
+  const [activeThemeId, setActiveThemeId] = useState("orange");
 
   // Map theme data to the main website accent colors
   const activeTheme = useMemo(() => {
@@ -79,7 +79,7 @@ export default function App() {
   const cssVars = {
     "--accent-main": activeTheme.player,
     "--accent-glow": `${activeTheme.player}44`,
-    "--site-bg": "#050505",
+    "--site-bg": "#000000",
     "--card-bg": "#0d0d0d",
     "--text-primary": "#ffffff",
     "--text-secondary": "rgba(255,255,255,0.2)",
@@ -144,10 +144,15 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="w-full h-full relative overflow-hidden rounded-[56px] bg-[#111] border border-white/5 shadow-2xl"
+            className="w-full h-full relative overflow-hidden rounded-[56px] border border-white/5 shadow-[0_0_30px_var(--accent-glow)] lg:shadow-[inset_0_0_40px_var(--accent-glow)]"
           >
             {/* Hero Background Radial */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,#1a1a1a_0%,#050505_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(17,17,17,0.8)_0%,rgba(0,0,0,0.95)_70%)]" />
+            
+            {/* Glossy Glint Effect */}
+            <div className="absolute inset-0 z-11 pointer-events-none opacity-[0.05]">
+              <div className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white to-transparent transform skew-x-[-25deg] animate-[glint_20s_linear_infinite]" />
+            </div>
             
             {/* Grid Overlay */}
             <div className="absolute inset-0 opacity-40 z-10 pointer-events-none" 
@@ -218,20 +223,20 @@ export default function App() {
                   ))}
                 </div>
 
-                <div className="h-32 relative flex items-center justify-center border rounded-[24px] bg-black/40 overflow-hidden" style={{ borderColor: 'var(--border-color)' }}>
+                <div className="flex-1 w-full relative flex flex-col items-center justify-center p-6 bg-black/40 rounded-[28px] border" style={{ borderColor: 'var(--border-color)' }}>
                    <div 
-                    className="grid gap-1 opacity-20 transition-all duration-700 ease-in-out"
+                    className="grid gap-1 opacity-30 transition-all duration-700 ease-in-out flex-grow"
                     style={{ 
                       gridTemplateColumns: `repeat(${getGridSize(difficulty)}, minmax(0, 1fr))`,
                       width: '60%',
-                      height: '60%'
+                      aspectRatio: '1/1'
                     }}
                   >
                     {Array.from({ length: getGridSize(difficulty) ** 2 }).map((_, i) => (
-                      <div key={i} className="aspect-square border border-white/10 rounded-[1px]" />
+                      <div key={i} className="border border-white/20 rounded-[1px] bg-white/[0.01]" />
                     ))}
                   </div>
-                  <div className="absolute bottom-3 text-[8px] opacity-20 font-mono tracking-widest uppercase text-white">State_{difficulty}</div>
+                  <div className="mt-4 text-[8px] opacity-20 font-mono tracking-widest uppercase text-white">State_{difficulty}</div>
                 </div>
               </motion.div>
             </div>
@@ -240,7 +245,7 @@ export default function App() {
       </div>
 
       {/* Themes Section Redesign */}
-      <section id="showcase" className="min-h-screen py-40 px-12 bg-[#050505]">
+      <section id="showcase" className="min-h-screen py-40 px-12">
         <div className="max-w-7xl mx-auto">
           <div className="mb-32">
             <motion.div
@@ -265,7 +270,7 @@ export default function App() {
                 transition={{ delay: i * 0.15 }}
                 onClick={() => setActiveThemeId(theme.id)}
                 className={`group cursor-pointer relative border rounded-[48px] sm:rounded-[64px] overflow-hidden p-8 sm:p-14 transition-all duration-700 h-auto lg:h-[680px] flex flex-col ${
-                  activeThemeId === theme.id ? "ring-2 ring-[var(--accent-main)]" : "hover:border-[var(--accent-main)]/20"
+                  activeThemeId === theme.id ? "ring-2 ring-[var(--accent-main)] shadow-[0_0_40px_var(--accent-glow)] lg:shadow-[inset_0_0_60px_var(--accent-glow)]" : "hover:border-[var(--accent-main)]/20"
                 }`}
                 style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--border-color)" }}
               >
@@ -288,7 +293,7 @@ export default function App() {
       </section>
 
       {/* Gameplay Section - Interaction Studies */}
-      <section id="gameplay" className="min-h-screen py-40 px-12 bg-[#050505]">
+      <section id="gameplay" className="min-h-screen py-40 px-12">
         <div className="max-w-7xl mx-auto space-y-40">
           {/* Interaction 01: Swipe Control */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -408,7 +413,7 @@ export default function App() {
       </section>
 
       {/* Features Grid */}
-      <section id="features" className="min-h-screen py-40 px-12 flex flex-col items-center justify-center bg-[#0d0d0d]">
+      <section id="features" className="min-h-screen py-40 px-12 flex flex-col items-center justify-center">
         <div className="max-w-6xl w-full">
            <div className="text-left mb-24 sm:mb-32 max-w-[600px]">
             <motion.div
@@ -449,7 +454,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-60 px-12 text-center border-t transition-colors" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--site-bg)' }}>
+      <footer className="py-60 px-12 text-center border-t transition-colors" style={{ borderColor: 'var(--border-color)' }}>
         <motion.div
            initial={{ y: 40, opacity: 0 }}
            whileInView={{ y: 0, opacity: 1 }}

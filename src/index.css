@@ -9,6 +9,12 @@
   --color-surface: rgba(255, 255, 255, 0.03);
   --color-glass: rgba(255, 255, 255, 0.1);
   --color-glass-border: rgba(255, 255, 255, 0.15);
+
+  @keyframes glint {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+  }
 }
 
 @layer base {
