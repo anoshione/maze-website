@@ -232,13 +232,13 @@ export default function App() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="pointer-events-auto"
+                className="pointer-events-auto flex justify-center sm:justify-start"
               >
                 <a 
                   href="https://mazegame-exe-stopped-working.vercel.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-block px-10 sm:px-14 py-4 sm:py-6 bg-white text-black rounded-full font-black text-[10px] sm:text-xs uppercase tracking-[3px] sm:tracking-[5px] transition-all transform hover:scale-105 active:scale-95 shadow-2xl hover:bg-[var(--accent-main)]"
+                  className="inline-flex items-center justify-center text-center px-10 sm:px-14 py-4 sm:py-6 bg-white text-black rounded-full font-black text-[10px] sm:text-xs uppercase tracking-[3px] sm:tracking-[5px] transition-all transform hover:scale-105 active:scale-95 shadow-2xl hover:bg-[var(--accent-main)]"
                 >
                   Dive into the maze
                 </a>
