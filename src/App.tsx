@@ -8,7 +8,6 @@ import {
   Gamepad2, 
   Layers, 
   Palette, 
-  ArrowBigRight,
   Sparkles,
   Grid3X3,
   Timer,
@@ -66,14 +65,71 @@ const MiniGameWindow = ({ themeColors }: { themeColors: any }) => {
   );
 };
 
+const HeroMazeVisual = ({ themeColors }: { themeColors: any }) => {
+  const mazeLines = useMemo(() => {
+    const maze = generateMaze(25, 25);
+    const lines = [];
+    for (let y = 0; y < 25; y++) {
+      for (let x = 0; x < 25; x++) {
+        const cell = maze[y][x];
+        if (cell.walls.right) lines.push(`M ${x + 1} ${y} L ${x + 1} ${y + 1}`);
+        if (cell.walls.bottom) lines.push(`M ${x} ${y + 1} L ${x + 1} ${y + 1}`);
+        if (cell.walls.top) lines.push(`M ${x} ${y} L ${x + 1} ${y}`);
+        if (cell.walls.left) lines.push(`M ${x} ${y} L ${x} ${y + 1}`);
+      }
+    }
+    return lines.join(" ");
+  }, []);
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      <motion.div
+        animate={{ 
+          rotateX: [5, -5, 5],
+          rotateY: [5, 15, 5],
+          y: [0, -8, 0]
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 12, 
+          ease: "easeInOut" 
+        }}
+        className="relative w-[400px] sm:w-[600px] lg:w-[900px] aspect-square flex items-center justify-center pointer-events-none"
+        style={{ perspective: "1500px" }}
+      >
+        {/* Glow Core */}
+        <div 
+          className="absolute inset-0 blur-[150px] rounded-full opacity-10 scale-90"
+          style={{ backgroundColor: themeColors.player }}
+        />
+        
+        {/* Maze Grid */}
+        <svg 
+          className="w-full h-full opacity-20 sm:opacity-30" 
+          viewBox="0 0 25 25" 
+          stroke={themeColors.grid} 
+          strokeWidth="0.04" 
+          fill="none"
+        >
+          <motion.path 
+            d={mazeLines} 
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 4, ease: "easeInOut" }}
+          />
+        </svg>
+      </motion.div>
+    </div>
+  );
+};
+
 export default function App() {
   const [activeSection, setActiveSection] = useState("hero");
   const [difficulty, setDifficulty] = useState("Medium");
   const [activeThemeId, setActiveThemeId] = useState("orange");
 
-  // Map theme data to the main website accent colors
   const activeTheme = useMemo(() => {
-    return themeShowcase.find(t => t.id === activeThemeId)?.theme || themeShowcase[3].theme;
+    return themeShowcase.find(t => t.id === activeThemeId)?.theme || themeShowcase[1].theme;
   }, [activeThemeId]);
 
   const cssVars = {
@@ -110,7 +166,6 @@ export default function App() {
     <div className="min-h-screen transition-colors duration-700 font-sans selection:bg-[var(--accent-main)]/30 overflow-x-hidden" style={{ ...cssVars, backgroundColor: "var(--site-bg)", color: "var(--text-primary)" }}>
       <DynamicMazeBackground />
       
-      {/* Navigation - Positioned to straddle the hero border */}
       <nav className="fixed right-3 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 sm:gap-3">
         {sections.map((section, idx) => (
           <motion.button
@@ -122,14 +177,14 @@ export default function App() {
               document.getElementById(section.id)?.scrollIntoView({ behavior: "smooth" });
               setActiveSection(section.id);
             }}
-            className={`px-4 sm:px-8 py-2 sm:py-3 rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-[2px] sm:tracking-[3px] transition-all duration-300 backdrop-blur-[40px] border shadow-2xl ${
+            className={`px-4 sm:px-8 py-2 sm:py-3 rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-[2px] sm:tracking-[3px] transition-all duration-300 backdrop-blur-[64px] border shadow-2xl ${
               activeSection === section.id 
                 ? "text-black scale-110" 
                 : "text-[var(--text-secondary)] hover:border-[var(--text-secondary)] hover:text-[var(--text-primary)]"
             }`}
             style={{ 
-              backgroundColor: activeSection === section.id ? "var(--accent-main)" : "var(--site-bg)",
-              borderColor: activeSection === section.id ? "var(--accent-main)" : "var(--border-color)"
+              backgroundColor: activeSection === section.id ? "var(--accent-main)" : "rgba(255,255,255,0.03)",
+              borderColor: activeSection === section.id ? "var(--accent-main)" : "rgba(255,255,255,0.1)"
             }}
           >
             {section.label}
@@ -138,30 +193,25 @@ export default function App() {
       </nav>
 
       <div className="p-10 lg:p-16 relative">
-        {/* Hero Section */}
         <section id="hero" className="h-[calc(100vh-128px)] w-full relative">
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="w-full h-full relative overflow-hidden rounded-[56px] border border-white/5 shadow-[0_0_30px_var(--accent-glow)] lg:shadow-[inset_0_0_40px_var(--accent-glow)]"
+            className="w-full h-full relative overflow-hidden rounded-[56px] border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] lg:shadow-[inset_0_0_40px_var(--accent-glow)] ring-1 ring-white/5"
           >
-            {/* Hero Background Radial */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(17,17,17,0.8)_0%,rgba(0,0,0,0.95)_70%)]" />
             
-            {/* Glossy Glint Effect */}
             <div className="absolute inset-0 z-11 pointer-events-none opacity-[0.05]">
               <div className="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white to-transparent transform skew-x-[-25deg] animate-[glint_20s_linear_infinite]" />
             </div>
             
-            {/* Grid Overlay */}
             <div className="absolute inset-0 opacity-40 z-10 pointer-events-none" 
                  style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`, backgroundSize: '40px 40px' }} 
             />
 
-            {/* Hero Content */}
-            <div className="absolute inset-0 z-20 flex flex-col justify-between p-16 md:p-24">
-              <div className="max-w-[800px]">
+            <div className="absolute inset-0 z-20 flex flex-col justify-between p-16 md:p-24 pointer-events-none">
+              <div className="max-w-[800px] pointer-events-auto">
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -174,10 +224,15 @@ export default function App() {
                 </motion.div>
               </div>
 
+              <div className="absolute inset-0 flex items-center justify-center">
+                <HeroMazeVisual themeColors={activeTheme} />
+              </div>
+
               <motion.div 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
+                className="pointer-events-auto"
               >
                 <a 
                   href="https://mazegame-exe-stopped-working.vercel.app/" 
@@ -190,14 +245,13 @@ export default function App() {
               </motion.div>
             </div>
 
-            {/* Difficulty Selector Integration - Moved further left to clear nav */}
             <div className="absolute right-40 bottom-20 z-30 hidden lg:block">
               <motion.div 
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.8 }}
                 className="w-[300px] backdrop-blur-[40px] border rounded-[40px] p-8"
-                style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--border-color)" }}
+                style={{ backgroundColor: "rgba(13,13,13,0.7)", borderColor: "var(--border-color)" }}
               >
                 <div className="text-[9px] uppercase font-black tracking-[5px] mb-6 font-mono" style={{ color: "var(--accent-main)" }}>00. Difficulty_Schema</div>
                 
@@ -244,7 +298,6 @@ export default function App() {
         </section>
       </div>
 
-      {/* Themes Section Redesign */}
       <section id="showcase" className="min-h-screen py-40 px-12">
         <div className="max-w-7xl mx-auto">
           <div className="mb-32">
@@ -280,7 +333,6 @@ export default function App() {
                    <p className="opacity-40 max-w-[320px] text-sm sm:text-base font-medium leading-relaxed">{theme.description}</p>
                 </div>
 
-                {/* Desktop Mockup Frame - Perfect Nested Rounding Fix */}
                 <div className="flex-grow flex items-center justify-center p-6 sm:p-8 bg-black/20 rounded-[32px] sm:rounded-[40px] border" style={{ borderColor: 'var(--border-color)' }}>
                    <div className="relative w-full aspect-[3/4] lg:aspect-video rounded-[24px] sm:rounded-[28px] shadow-2xl transition-all duration-700 group-hover:scale-[1.02] ring-4 ring-white/10 ring-inset overflow-hidden">
                       <MiniGameWindow themeColors={theme.theme} />
@@ -292,10 +344,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* Gameplay Section - Interaction Studies */}
       <section id="gameplay" className="min-h-screen py-40 px-12">
         <div className="max-w-7xl mx-auto space-y-40">
-          {/* Interaction 01: Swipe Control */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <motion.div
               initial={{ x: -50, opacity: 0 }}
@@ -344,7 +394,6 @@ export default function App() {
             </motion.div>
           </div>
 
-          {/* Interaction 02: Selection & Launch */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
@@ -412,7 +461,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Features Grid */}
       <section id="features" className="min-h-screen py-40 px-12 flex flex-col items-center justify-center">
         <div className="max-w-6xl w-full">
            <div className="text-left mb-24 sm:mb-32 max-w-[600px]">
@@ -428,10 +476,10 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { icon: <Grid3X3 />, title: "Endless Paths", desc: "Procedural engine generates millions of unique maze permutations in real-time." },
-              { icon: <Sparkles />, title: "Theme Selector", desc: "Switch instantly between aesthetic presets without breaking your logic flow." },
-              { icon: <Gamepad2 />, title: "Options Menu", desc: "Fine-tune your experience with haptic feedback and spatialized sound settings." },
-              { icon: <Timer />, title: "Time Trial", desc: "Challenge the clock. Race through grids against tight time thresholds for ultimate mastery." }
+              { icon: <Grid3X3 size={40} />, title: "Endless Paths", desc: "Procedural engine generates millions of unique maze permutations in real-time." },
+              { icon: <Sparkles size={40} />, title: "Theme Selector", desc: "Switch instantly between aesthetic presets without breaking your logic flow." },
+              { icon: <Gamepad2 size={40} />, title: "Options Menu", desc: "Fine-tune your experience with haptic feedback and spatialized sound settings." },
+              { icon: <Timer size={40} />, title: "Time Trial", desc: "Challenge the clock. Race through grids against tight time thresholds for ultimate mastery." }
             ].map((feature, i) => (
               <motion.div 
                 key={i}
@@ -442,7 +490,7 @@ export default function App() {
                 className="p-12 backdrop-blur-[24px] rounded-[48px] border transition-all duration-500"
                 style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--border-color)" }}
               >
-                <div className="w-12 h-12 mb-8" style={{ color: "var(--accent-main)" }}>
+                <div className="mb-8" style={{ color: "var(--accent-main)" }}>
                   {feature.icon}
                 </div>
                 <h3 className="text-lg font-black uppercase tracking-tight mb-4">{feature.title}</h3>
@@ -453,7 +501,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-60 px-12 text-center border-t transition-colors" style={{ borderColor: 'var(--border-color)' }}>
         <motion.div
            initial={{ y: 40, opacity: 0 }}

@@ -1,6 +1,5 @@
 {
-  "name": "maze.exe has stopped working",
-  "description": "A minimal, atmospheric maze puzzle experience. Navigate through intricate paths with a clean, focused aesthetic.",
-  "requestFramePermissions": [],
-  "majorCapabilities": []
+  "name": "OZ maze",
+  "description": "A polished maze game with haptic feedback, responsive touch controls, and dynamic themes.",
+  "requestFramePermissions": []
 }
