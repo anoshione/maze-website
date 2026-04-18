@@ -170,9 +170,13 @@ export default function App() {
         {sections.map((section, idx) => (
           <motion.button
             key={section.id}
-            initial={{ x: 20, opacity: 0 }}
+            initial={{ x: 30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.1 * idx }}
+            transition={{ 
+              delay: 0.1 * idx,
+              duration: 0.8,
+              ease: [0.16, 1, 0.3, 1]
+            }}
             onClick={() => {
               document.getElementById(section.id)?.scrollIntoView({ behavior: "smooth" });
               setActiveSection(section.id);
@@ -247,9 +251,13 @@ export default function App() {
 
             <div className="absolute right-40 bottom-20 z-30 hidden lg:block">
               <motion.div 
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.8 }}
+                initial={{ x: 40, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ 
+                  delay: 0.8,
+                  duration: 1,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
                 className="w-[300px] backdrop-blur-[40px] border rounded-[40px] p-8"
                 style={{ backgroundColor: "rgba(13,13,13,0.7)", borderColor: "var(--border-color)" }}
               >
@@ -317,10 +325,14 @@ export default function App() {
             {themeShowcase.map((theme, i) => (
               <motion.div 
                 key={theme.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ 
+                  delay: i * 0.1,
+                  duration: 1.2,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
                 onClick={() => setActiveThemeId(theme.id)}
                 className={`group cursor-pointer relative border rounded-[48px] sm:rounded-[64px] overflow-hidden p-8 sm:p-14 transition-all duration-700 h-auto lg:h-[680px] flex flex-col ${
                   activeThemeId === theme.id ? "ring-2 ring-[var(--accent-main)] shadow-[0_0_40px_var(--accent-glow)] lg:shadow-[inset_0_0_60px_var(--accent-glow)]" : "hover:border-[var(--accent-main)]/20"
@@ -485,8 +497,12 @@ export default function App() {
                 key={i}
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ 
+                  delay: i * 0.1,
+                  duration: 0.8,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
                 className="p-12 backdrop-blur-[24px] rounded-[48px] border transition-all duration-500"
                 style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--border-color)" }}
               >
