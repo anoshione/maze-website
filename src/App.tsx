@@ -67,10 +67,10 @@ const MiniGameWindow = ({ themeColors }: { themeColors: any }) => {
 
 const HeroMazeVisual = ({ themeColors }: { themeColors: any }) => {
   const mazeLines = useMemo(() => {
-    const maze = generateMaze(25, 25);
+    const maze = generateMaze(45, 45);
     const lines = [];
-    for (let y = 0; y < 25; y++) {
-      for (let x = 0; x < 25; x++) {
+    for (let y = 0; y < 45; y++) {
+      for (let x = 0; x < 45; x++) {
         const cell = maze[y][x];
         if (cell.walls.right) lines.push(`M ${x + 1} ${y} L ${x + 1} ${y + 1}`);
         if (cell.walls.bottom) lines.push(`M ${x} ${y + 1} L ${x + 1} ${y + 1}`);
@@ -82,11 +82,11 @@ const HeroMazeVisual = ({ themeColors }: { themeColors: any }) => {
   }, []);
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-visible">
       <motion.div
         animate={{ 
           rotateX: [5, -5, 5],
-          rotateY: [5, 15, 5],
+          rotateY: [5, 12, 5],
           y: [0, -8, 0]
         }}
         transition={{ 
@@ -94,22 +94,23 @@ const HeroMazeVisual = ({ themeColors }: { themeColors: any }) => {
           duration: 12, 
           ease: "easeInOut" 
         }}
-        className="relative w-[400px] sm:w-[600px] lg:w-[900px] aspect-square flex items-center justify-center pointer-events-none"
+        className="relative w-[150%] h-[120%] sm:w-[120%] sm:h-[120%] lg:w-[1400px] lg:h-[800px] aspect-square sm:aspect-video lg:aspect-[45/25] flex items-center justify-center"
         style={{ perspective: "1500px" }}
       >
         {/* Glow Core */}
         <div 
-          className="absolute inset-0 blur-[150px] rounded-full opacity-10 scale-90"
+          className="absolute inset-x-0 inset-y-0 lg:inset-y-1/4 blur-[180px] rounded-full opacity-10 scale-90"
           style={{ backgroundColor: themeColors.player }}
         />
         
         {/* Maze Grid */}
         <svg 
-          className="w-full h-full opacity-20 sm:opacity-30" 
-          viewBox="0 0 25 25" 
+          className="w-full h-full opacity-30 sm:opacity-40" 
+          viewBox="0 0 45 45" 
           stroke={themeColors.grid} 
           strokeWidth="0.04" 
           fill="none"
+          preserveAspectRatio="xMidYMid slice"
         >
           <motion.path 
             d={mazeLines} 
@@ -228,10 +229,6 @@ export default function App() {
                 </motion.div>
               </div>
 
-              <div className="absolute inset-0 flex items-center justify-center">
-                <HeroMazeVisual themeColors={activeTheme} />
-              </div>
-
               <motion.div 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -247,6 +244,9 @@ export default function App() {
                   Dive into the maze
                 </a>
               </motion.div>
+
+              {/* Repositioned Maze Visual to be on top of but behind interaction */}
+              <HeroMazeVisual themeColors={activeTheme} />
             </div>
 
             <div className="absolute right-40 bottom-20 z-30 hidden lg:block">
