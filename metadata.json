@@ -1,5 +1,6 @@
 {
-  "name": "OZ maze",
+  "name": "maze.exe has stopped",
   "description": "A polished maze game with haptic feedback, responsive touch controls, and dynamic themes.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }
