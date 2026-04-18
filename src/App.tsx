@@ -99,7 +99,7 @@ const HeroMazeVisual = ({ themeColors }: { themeColors: any }) => {
       >
         {/* Glow Core */}
         <div 
-          className="absolute inset-x-0 inset-y-0 lg:inset-y-1/4 blur-[180px] rounded-full opacity-10 scale-90"
+          className="absolute inset-x-0 inset-y-0 lg:inset-y-1/4 blur-[180px] rounded-full opacity-[0.03] lg:opacity-10 scale-90"
           style={{ backgroundColor: themeColors.player }}
         />
         
@@ -171,13 +171,6 @@ export default function App() {
         {sections.map((section, idx) => (
           <motion.button
             key={section.id}
-            initial={{ x: 30, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ 
-              delay: 0.1 * idx,
-              duration: 0.8,
-              ease: [0.16, 1, 0.3, 1]
-            }}
             onClick={() => {
               document.getElementById(section.id)?.scrollIntoView({ behavior: "smooth" });
               setActiveSection(section.id);
@@ -200,9 +193,6 @@ export default function App() {
       <div className="p-10 lg:p-16 relative">
         <section id="hero" className="h-[calc(100vh-128px)] w-full relative">
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
             className="w-full h-full relative overflow-hidden rounded-[56px] border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] lg:shadow-[inset_0_0_40px_var(--accent-glow)] ring-1 ring-white/5"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(17,17,17,0.8)_0%,rgba(0,0,0,0.95)_70%)]" />
@@ -218,21 +208,15 @@ export default function App() {
             <div className="absolute inset-0 z-20 flex flex-col justify-between p-16 md:p-24 pointer-events-none">
               <div className="max-w-[800px] pointer-events-auto">
                 <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
                 >
                   <h1 className="text-[42px] sm:text-[64px] lg:text-[100px] font-[900] tracking-[-3px] sm:tracking-[-4px] lg:tracking-[-8px] leading-[0.8] flex flex-col">
-                    <span className="text-[var(--accent-main)] drop-shadow-[0_0_30px_var(--accent-glow)] uppercase">MAZE.EXE</span>
+                    <span className="text-[var(--accent-main)] drop-shadow-[0_0_15px_var(--accent-glow)] lg:drop-shadow-[0_0_30px_var(--accent-glow)] uppercase">MAZE.EXE</span>
                     <span className="opacity-20 text-[18px] sm:text-[24px] lg:text-[40px] tracking-widest mt-4">has stopped working</span>
                   </h1>
                 </motion.div>
               </div>
 
               <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 }}
                 className="pointer-events-auto flex justify-center sm:justify-start"
               >
                 <a 
@@ -251,13 +235,6 @@ export default function App() {
 
             <div className="absolute right-40 bottom-20 z-30 hidden lg:block">
               <motion.div 
-                initial={{ x: 40, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ 
-                  delay: 0.8,
-                  duration: 1,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
                 className="w-[300px] backdrop-blur-[40px] border rounded-[40px] p-8"
                 style={{ backgroundColor: "rgba(13,13,13,0.7)", borderColor: "var(--border-color)" }}
               >
@@ -310,9 +287,6 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-32">
             <motion.div
-              initial={{ x: -30, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
             >
               <span className="font-bold text-[10px] tracking-[5px] uppercase mb-6 block font-mono" style={{ color: "var(--accent-main)" }}>01. Design Protocols</span>
               <h2 className="text-5xl sm:text-7xl lg:text-8xl font-[900] tracking-[-3px] sm:tracking-[-6px] leading-[0.8] text-white lowercase">
@@ -325,14 +299,6 @@ export default function App() {
             {themeShowcase.map((theme, i) => (
               <motion.div 
                 key={theme.id}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ 
-                  delay: i * 0.1,
-                  duration: 1.2,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
                 onClick={() => setActiveThemeId(theme.id)}
                 className={`group cursor-pointer relative border rounded-[48px] sm:rounded-[64px] overflow-hidden p-8 sm:p-14 transition-all duration-700 h-auto lg:h-[680px] flex flex-col ${
                   activeThemeId === theme.id ? "ring-2 ring-[var(--accent-main)] shadow-[0_0_40px_var(--accent-glow)] lg:shadow-[inset_0_0_60px_var(--accent-glow)]" : "hover:border-[var(--accent-main)]/20"
@@ -360,9 +326,6 @@ export default function App() {
         <div className="max-w-7xl mx-auto space-y-40">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
             >
               <span className="font-bold text-[10px] tracking-[5px] uppercase mb-8 block font-mono" style={{ color: "var(--accent-main)" }}>02. Logic Control</span>
               <h2 className="text-6xl sm:text-8xl lg:text-9xl font-[900] tracking-[-4px] sm:tracking-[-8px] mb-8 sm:mb-12 leading-[0.8] lowercase text-white">
@@ -374,9 +337,6 @@ export default function App() {
             </motion.div>
 
             <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
               className="relative"
             >
               <div className="h-[500px] sm:h-[600px] lg:aspect-[4/5] lg:h-auto bg-white/[0.01] backdrop-blur-[60px] rounded-[48px] sm:rounded-[60px] border border-white/10 overflow-hidden shadow-2xl relative flex flex-col items-center justify-center p-12">
@@ -408,9 +368,6 @@ export default function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                <motion.div 
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
                 className="relative order-2 lg:order-1"
               >
                 <div className="h-[600px] sm:h-[700px] lg:aspect-[4/5] lg:h-auto bg-white/[0.01] backdrop-blur-[60px] rounded-[48px] sm:rounded-[60px] border border-white/10 overflow-hidden shadow-2xl relative p-8 sm:p-12 flex flex-col items-center justify-between">
@@ -456,9 +413,6 @@ export default function App() {
               </motion.div>
   
               <motion.div
-                initial={{ x: 50, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
                 className="order-1 lg:order-2"
               >
                 <span className="font-bold text-[10px] tracking-[5px] uppercase mb-8 block font-mono" style={{ color: "var(--accent-main)" }}>03. Entry Flow</span>
@@ -477,9 +431,6 @@ export default function App() {
         <div className="max-w-6xl w-full">
            <div className="text-left mb-24 sm:mb-32 max-w-[600px]">
             <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
             >
               <h2 className="text-6xl sm:text-9xl font-[900] mb-8 tracking-[-4px] sm:tracking-[-8px] leading-[0.8] lowercase text-white/10">logic<br/><span className="text-white">infinite.</span></h2>
               <p className="text-white/40 text-lg sm:text-xl font-medium leading-relaxed">Pure algorithmic exploration designed for zero-distraction execution.</p>
@@ -495,14 +446,6 @@ export default function App() {
             ].map((feature, i) => (
               <motion.div 
                 key={i}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ 
-                  delay: i * 0.1,
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
                 className="p-12 backdrop-blur-[24px] rounded-[48px] border transition-all duration-500"
                 style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--border-color)" }}
               >
@@ -519,9 +462,6 @@ export default function App() {
 
       <footer className="py-60 px-12 text-center border-t transition-colors" style={{ borderColor: 'var(--border-color)' }}>
         <motion.div
-           initial={{ y: 40, opacity: 0 }}
-           whileInView={{ y: 0, opacity: 1 }}
-           viewport={{ once: true }}
         >
           <div className="text-[14px] font-black uppercase tracking-[10px] opacity-20 mb-12 italic">Dive into the maze</div>
           <h2 className="text-[40px] sm:text-[60px] md:text-[100px] font-[900] tracking-[-4px] sm:tracking-[-6px] mb-12 sm:mb-16 leading-[0.8] transition-colors" style={{ color: "var(--accent-main)", filter: `drop-shadow(0 0 40px var(--accent-glow))` }}>MAZE.EXE</h2>
