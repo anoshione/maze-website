@@ -7,7 +7,7 @@ export const themeShowcase = [
   {
     id: "slate",
     title: "Slate Spectre",
-    description: "Atmospheric grayscale for ultimate focus.",
+    description: "Atmospheric grayscale, focus on the game.",
     theme: {
       bg: '#171717',
       mazeBg: '#171717',
@@ -47,7 +47,7 @@ export const themeShowcase = [
   {
     id: "rose",
     title: "Rose Glitch",
-    description: "Aggressive pink and red warnings.",
+    description: "Aggressive pink, you know you like it.",
     theme: {
       bg: '#1c1718',
       mazeBg: '#1c1718',
@@ -67,7 +67,7 @@ export const themeShowcase = [
   {
     id: "emerald",
     title: "Neon Pulse",
-    description: "High-contrast digital neon energy.",
+    description: "Delve into the neon punk.",
     theme: {
       bg: '#171c19',
       mazeBg: '#171c19',

@@ -210,8 +210,8 @@ export default function App() {
                 <motion.div
                 >
                   <h1 className="text-[42px] sm:text-[64px] lg:text-[100px] font-[900] tracking-[-3px] sm:tracking-[-4px] lg:tracking-[-8px] leading-[0.8] flex flex-col">
-                    <span className="text-[var(--accent-main)] drop-shadow-[0_0_15px_var(--accent-glow)] lg:drop-shadow-[0_0_30px_var(--accent-glow)] uppercase">MAZE.EXE</span>
-                    <span className="opacity-20 text-[18px] sm:text-[24px] lg:text-[40px] tracking-widest mt-4">has stopped working</span>
+                    <span className="text-[var(--accent-main)] drop-shadow-[0_0_15px_var(--accent-glow)] lg:drop-shadow-[0_0_30px_var(--accent-glow)] uppercase">ESCAPE</span>
+                    <span className="opacity-20 text-[18px] sm:text-[24px] lg:text-[40px] tracking-widest mt-4">into the maze</span>
                   </h1>
                 </motion.div>
               </div>
@@ -225,7 +225,7 @@ export default function App() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center text-center px-10 sm:px-14 py-4 sm:py-6 bg-white text-black rounded-full font-black text-[10px] sm:text-xs uppercase tracking-[3px] sm:tracking-[5px] transition-all transform hover:scale-105 active:scale-95 shadow-2xl hover:bg-[var(--accent-main)]"
                 >
-                  Dive into the maze
+                  PLAY
                 </a>
               </motion.div>
 
@@ -238,7 +238,7 @@ export default function App() {
                 className="w-[300px] backdrop-blur-[40px] border rounded-[40px] p-8"
                 style={{ backgroundColor: "rgba(13,13,13,0.7)", borderColor: "var(--border-color)" }}
               >
-                <div className="text-[9px] uppercase font-black tracking-[5px] mb-6 font-mono" style={{ color: "var(--accent-main)" }}>00. Difficulty_Schema</div>
+                <div className="text-[9px] uppercase font-black tracking-[5px] mb-6 font-mono" style={{ color: "var(--accent-main)" }}>00. DIFFICULTY_SELECTOR</div>
                 
                 <div className="flex flex-col gap-2 mb-8">
                   {difficultyLevels.map((lvl) => (
@@ -288,9 +288,9 @@ export default function App() {
           <div className="mb-32">
             <motion.div
             >
-              <span className="font-bold text-[10px] tracking-[5px] uppercase mb-6 block font-mono" style={{ color: "var(--accent-main)" }}>01. Design Protocols</span>
+              <span className="font-bold text-[10px] tracking-[5px] uppercase mb-6 block font-mono" style={{ color: "var(--accent-main)" }}>01. DESIGN_STYLES</span>
               <h2 className="text-5xl sm:text-7xl lg:text-8xl font-[900] tracking-[-3px] sm:tracking-[-6px] leading-[0.8] text-white lowercase">
-                aesthetic <br/> <span className="text-white/20">calibration.</span>
+                aesthetic <br/> <span className="text-white/20">choices.</span>
               </h2>
             </motion.div>
           </div>
@@ -306,7 +306,7 @@ export default function App() {
                 style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--border-color)" }}
               >
                 <div className="relative z-20 mb-8 sm:mb-12">
-                   <div className="text-[10px] uppercase tracking-[8px] font-black mb-5" style={{ color: activeThemeId === theme.id ? 'var(--accent-main)' : 'var(--text-secondary)' }}>PROTOCOL_{theme.id.toUpperCase()}</div>
+                   <div className="text-[10px] uppercase tracking-[8px] font-black mb-5" style={{ color: activeThemeId === theme.id ? 'var(--accent-main)' : 'var(--text-secondary)' }}>{theme.id.toUpperCase()}_</div>
                    <h3 className="text-3xl sm:text-5xl font-black tracking-tight mb-5 leading-none">{theme.title}</h3>
                    <p className="opacity-40 max-w-[320px] text-sm sm:text-base font-medium leading-relaxed">{theme.description}</p>
                 </div>
@@ -327,12 +327,12 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <motion.div
             >
-              <span className="font-bold text-[10px] tracking-[5px] uppercase mb-8 block font-mono" style={{ color: "var(--accent-main)" }}>02. Logic Control</span>
+              <span className="font-bold text-[10px] tracking-[5px] uppercase mb-8 block font-mono" style={{ color: "var(--accent-main)" }}>02. CONTROL_MECHANICS</span>
               <h2 className="text-6xl sm:text-8xl lg:text-9xl font-[900] tracking-[-4px] sm:tracking-[-8px] mb-8 sm:mb-12 leading-[0.8] lowercase text-white">
                 swipe <br/> <span className="text-white/10">control.</span>
               </h2>
               <p className="text-lg sm:text-xl text-white/40 leading-relaxed max-w-md font-medium">
-                Native gesture mapping. Zero latency interaction designed for modern web acceleration.
+                Native gesture mapping. Zero latency interaction designed for fluid movement control.
               </p>
             </motion.div>
 
@@ -360,7 +360,7 @@ export default function App() {
                 </div>
                 
                 <div className="mt-8">
-                   <div className="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-white/30 uppercase tracking-[4px]" style={{ color: "var(--accent-main)", borderColor: "var(--accent-main)", opacity: 0.4 }}>Gesture Protocol</div>
+                   <div className="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-white/30 uppercase tracking-[4px]" style={{ color: "var(--accent-main)", borderColor: "var(--accent-main)", opacity: 0.4 }}>GEESTURE_CONTROLS</div>
                 </div>
               </div>
             </motion.div>
@@ -407,7 +407,7 @@ export default function App() {
                   </motion.div>
   
                   <div className="mt-4">
-                     <div className="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-white/30 uppercase tracking-[4px]" style={{ color: "var(--accent-main)", borderColor: "var(--accent-main)", opacity: 0.4 }}>Launch Protocol</div>
+                     <div className="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] text-white/30 uppercase tracking-[4px]" style={{ color: "var(--accent-main)", borderColor: "var(--accent-main)", opacity: 0.4 }}>TAP_TO_DIVE</div>
                   </div>
                 </div>
               </motion.div>
@@ -415,12 +415,12 @@ export default function App() {
               <motion.div
                 className="order-1 lg:order-2"
               >
-                <span className="font-bold text-[10px] tracking-[5px] uppercase mb-8 block font-mono" style={{ color: "var(--accent-main)" }}>03. Entry Flow</span>
+                <span className="font-bold text-[10px] tracking-[5px] uppercase mb-8 block font-mono" style={{ color: "var(--accent-main)" }}>03. ENTRY_FLOW</span>
                 <h2 className="text-6xl sm:text-8xl lg:text-9xl font-[900] tracking-[-4px] sm:tracking-[-8px] mb-8 sm:mb-12 leading-[0.8] lowercase text-white text-right">
                   tap <br/> <span className="text-white/10 whitespace-nowrap">to dive.</span>
                 </h2>
                 <p className="text-lg sm:text-xl text-white/40 leading-relaxed max-w-md font-medium text-right ml-auto">
-                  Select your complexity threshold and tap the maze gateway. Instant transition from menu to procedural reality.
+                  Select your difficulty, tap the maze and enjoy the smooth morphing animation into the maze.
                 </p>
               </motion.div>
           </div>
@@ -432,17 +432,17 @@ export default function App() {
            <div className="text-left mb-24 sm:mb-32 max-w-[600px]">
             <motion.div
             >
-              <h2 className="text-6xl sm:text-9xl font-[900] mb-8 tracking-[-4px] sm:tracking-[-8px] leading-[0.8] lowercase text-white/10">logic<br/><span className="text-white">infinite.</span></h2>
-              <p className="text-white/40 text-lg sm:text-xl font-medium leading-relaxed">Pure algorithmic exploration designed for zero-distraction execution.</p>
+              <h2 className="text-6xl sm:text-9xl font-[900] mb-8 tracking-[-4px] sm:tracking-[-8px] leading-[0.8] lowercase text-white">feature<br/><span className="text-white/10">points.</span></h2>
+              <p className="text-white/40 text-lg sm:text-xl font-medium leading-relaxed">Distraction-free exploration through endless mazes.</p>
             </motion.div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { icon: <Grid3X3 size={40} />, title: "Endless Paths", desc: "Procedural engine generates millions of unique maze permutations in real-time." },
-              { icon: <Sparkles size={40} />, title: "Theme Selector", desc: "Switch instantly between aesthetic presets without breaking your logic flow." },
-              { icon: <Gamepad2 size={40} />, title: "Options Menu", desc: "Fine-tune your experience with haptic feedback and spatialized sound settings." },
-              { icon: <Timer size={40} />, title: "Time Trial", desc: "Challenge the clock. Race through grids against tight time thresholds for ultimate mastery." }
+              { icon: <Grid3X3 size={40} />, title: "ENDLESS_MAZES", desc: "Complex algorithm generates millions of unique mazes in real-time." },
+              { icon: <Sparkles size={40} />, title: "THEME_SELECTOR", desc: "Switch instantly between aesthetic presets without breaking your immersion." },
+              { icon: <Gamepad2 size={40} />, title: "OPTIONS_MENU", desc: "Fine-tune your experience with haptic feedback and spatialized sound settings." },
+              { icon: <Timer size={40} />, title: "TIME_TRIAL", desc: "Race against time to escape the maze. But is it really an escape?" }
             ].map((feature, i) => (
               <motion.div 
                 key={i}
@@ -463,8 +463,8 @@ export default function App() {
       <footer className="py-60 px-12 text-center border-t transition-colors" style={{ borderColor: 'var(--border-color)' }}>
         <motion.div
         >
-          <div className="text-[14px] font-black uppercase tracking-[10px] opacity-20 mb-12 italic">Dive into the maze</div>
-          <h2 className="text-[40px] sm:text-[60px] md:text-[100px] font-[900] tracking-[-4px] sm:tracking-[-6px] mb-12 sm:mb-16 leading-[0.8] transition-colors" style={{ color: "var(--accent-main)", filter: `drop-shadow(0 0 40px var(--accent-glow))` }}>MAZE.EXE</h2>
+          <h2 className="text-[40px] sm:text-[60px] md:text-[100px] font-[900] tracking-[-4px] sm:tracking-[-6px] mb-12 sm:mb-16 leading-[0.8] transition-colors" style={{ color: "var(--accent-main)", filter: `drop-shadow(0 0 40px var(--accent-glow))` }}>ESCAPE</h2>
+          <div className="text-[14px] font-black uppercase tracking-[10px] opacity-20 mb-12 italic">INTO THE REALITY</div>
           
           <a 
             href="https://mazegame-exe-stopped-working.vercel.app/"
@@ -472,7 +472,7 @@ export default function App() {
             rel="noopener noreferrer"
             className="inline-block px-12 sm:px-24 py-5 sm:py-8 bg-white text-black rounded-full font-black text-sm sm:text-xl uppercase tracking-[5px] sm:tracking-[10px] transition-all transform hover:scale-110 active:scale-95 shadow-2xl hover:bg-[var(--accent-main)]"
           >
-            Launch
+            LAUNCH
           </a>
         </motion.div>
 
